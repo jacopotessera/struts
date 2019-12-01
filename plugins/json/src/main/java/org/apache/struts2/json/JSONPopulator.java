@@ -84,11 +84,11 @@ public class JSONPopulator {
 
                     // use only public setters
                     if (Modifier.isPublic(method.getModifiers())) {
-                        Class[] paramTypes = method.getParameterTypes();
+                        Class paramType = prop.getPropertyType();
                         Type[] genericTypes = method.getGenericParameterTypes();
 
-                        if (paramTypes.length == 1) {
-                            Object convertedValue = this.convert(paramTypes[0], genericTypes[0], value, method);
+                        if(paramType != null) {
+                            Object convertedValue = this.convert(paramType, genericTypes[0], value, method);
                             method.invoke(object, new Object[] { convertedValue });
                         }
                     }
